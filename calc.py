@@ -6,12 +6,12 @@ def application(environ, start_reponse):
     first_num = d.get('first_num', [''])[0]
     second_num = d.get('second_num',[''])[0]
     sum, mul =0, 0
-    if '' not in [first_num, second_num]:
+    try:
 	first_num, second_num = int(first_num), int(second_num)
 	sum = first_num + second_num
 	mul = first_num * second_num
-    if '' in [first_num, second_num]:
-	sum = -1
+    except ValueError:
+        sum = -1
 	mul = -1
     response_body = html % {'sum':sum, 'mul':mul}
     start_response('200 OK', [
